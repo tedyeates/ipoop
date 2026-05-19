@@ -6,8 +6,8 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
 
 ## Tasks
 
-- [ ] 1. Backend project setup and core infrastructure
-  - [ ] 1.1 Initialise Deno backend project structure
+- [X] 1. Backend project setup and core infrastructure
+  - [X] 1.1 Initialise Deno backend project structure
     - Create `backend/` directory with `deno.json` (import map, tasks for dev/start/test)
     - Create `backend/main.ts` entry point with request routing skeleton
     - Create `backend/lib/cors.ts` CORS middleware that reads `CORS_ORIGIN` env var and enforces origin matching
@@ -15,67 +15,67 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - Create `backend/lib/ulid.ts` ULID generation utility (Crockford Base32, 26 chars)
     - _Requirements: 12.3, 12.4_
 
-  - [ ] 1.2 Set up Turso database client and schema
+  - [X] 1.2 Set up Turso database client and schema
     - Create `backend/db/client.ts` initialising `@libsql/client` with `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN` env vars
     - Create `backend/db/schema.sql` with all 5 tables (meal_logs, stool_logs, context_logs, symptom_logs, hypotheses) and indexes
     - Create `backend/db/queries.ts` with parameterised insert/select/delete functions for each table
     - _Requirements: 12.1, 12.4_
 
-  - [ ] 1.3 Implement server-side validation utilities
+  - [X] 1.3 Implement server-side validation utilities
     - Create `backend/lib/validate.ts` with validators for: numeric ranges, string lengths, enum membership, FODMAP flag subsets, array constraints
     - Each validator returns field-level error messages for the `ApiError.fields` map
     - _Requirements: 1.7, 1.8, 2.2, 2.3, 2.4, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 4.2, 4.3_
 
-  - [ ]* 1.4 Write property tests for validation utilities
+  - [X]* 1.4 Write property tests for validation utilities
     - **Property 2: Validation rejects out-of-range numeric fields**
     - **Property 3: Description length boundary enforcement**
     - **Property 4: Invalid enum values are rejected**
     - **Property 5: FODMAP flag subset acceptance**
     - **Validates: Requirements 1.2, 1.7, 1.8, 2.2, 2.3, 2.4, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 4.2, 4.3**
 
-  - [ ]* 1.5 Write property tests for ULID generation and CORS enforcement
+  - [X]* 1.5 Write property tests for ULID generation and CORS enforcement
     - **Property 14: All generated IDs are valid ULIDs and all timestamps are valid ISO8601**
     - **Property 10: CORS origin enforcement**
     - **Validates: Requirements 12.3, 12.4**
 
-- [ ] 2. Backend CRUD route handlers
-  - [ ] 2.1 Implement meal log route (`backend/routes/meals.ts`)
+- [X] 2. Backend CRUD route handlers
+  - [X] 2.1 Implement meal log route (`backend/routes/meals.ts`)
     - POST handler: validate request body (description required 1–500 chars, optional meal_type enum, fodmap_flags subset, ingredients array ≤50 items, portion_size enum, eating_speed enum), generate ULID + ISO8601 timestamp, insert into `meal_logs`, return 201 with full record
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8_
 
-  - [ ] 2.2 Implement stool log route (`backend/routes/stools.ts`)
+  - [X] 2.2 Implement stool log route (`backend/routes/stools.ts`)
     - POST handler: validate bristol_type (1–7 required), optional frequency (1–20), urgency (boolean), pain_score (0–10), blood (boolean), notes (≤1000 chars), generate ULID + timestamp, insert into `stool_logs`, return 201
     - _Requirements: 2.1, 2.2, 2.3, 2.4_
 
-  - [ ] 2.3 Implement context log route (`backend/routes/context.ts`)
+  - [X] 2.3 Implement context log route (`backend/routes/context.ts`)
     - POST handler: validate all optional fields (stress 1–10, sleep_hours 0–24, sleep_quality 1–5, water 0–20, exercise_type enum, exercise_duration 0–1440, caffeine 0–2000, alcohol 0–50, menstrual_phase enum, medications ≤500 chars, notes ≤1000 chars), reject if any field invalid, persist if at least one valid field provided
     - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9_
 
-  - [ ] 2.4 Implement symptom log route (`backend/routes/symptoms.ts`)
+  - [X] 2.4 Implement symptom log route (`backend/routes/symptoms.ts`)
     - POST handler: validate all 6 severity scores (0–10, all required), optional notes (≤1000 chars), generate ULID + timestamp, insert into `symptom_logs`, return 201
     - _Requirements: 4.1, 4.2, 4.3, 4.4_
 
-  - [ ]* 2.5 Write property test for log entry round-trip persistence
+  - [X]* 2.5 Write property test for log entry round-trip persistence
     - **Property 1: Log entry round-trip persistence**
     - **Validates: Requirements 1.1, 1.2, 1.3, 2.1, 3.1, 3.2, 3.9, 4.1**
 
-- [ ] 3. Checkpoint — Backend CRUD verification
+- [X] 3. Checkpoint — Backend CRUD verification
   - Ensure all tests pass, ask the user if questions arise.
 
-- [ ] 4. AI integration layer
-  - [ ] 4.1 Set up Anthropic SDK client (`backend/ai/client.ts`)
+- [X] 4. AI integration layer
+  - [X] 4.1 Set up Anthropic SDK client (`backend/ai/client.ts`)
     - Initialise `@anthropic-ai/sdk` with `ANTHROPIC_API_KEY` env var
     - Configure timeouts (15s for scan, 60s for review)
     - _Requirements: 6.11, 12.2_
 
-  - [ ] 4.2 Implement ingredient scan prompt and route (`backend/ai/scan-prompt.ts`, `backend/routes/scan-ingredients.ts`)
+  - [X] 4.2 Implement ingredient scan prompt and route (`backend/ai/scan-prompt.ts`, `backend/routes/scan-ingredients.ts`)
     - POST handler: validate image_base64 (≤5MB decoded), mime_type (jpeg/png/gif/webp)
     - Build Claude vision prompt requesting structured JSON (description, ingredients, fodmap_flags, fodmap_detail, confidence, notes)
     - Parse and validate Claude response against ScanResponse schema
     - Return 200 with structured response; handle timeout (504) and unavailable (503)
     - _Requirements: 5.1, 5.2, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9_
 
-  - [ ] 4.3 Implement AI review prompt and route (`backend/ai/review-prompt.ts`, `backend/routes/review.ts`)
+  - [X] 4.3 Implement AI review prompt and route (`backend/ai/review-prompt.ts`, `backend/routes/review.ts`)
     - POST handler: query all logs up to 90 days, assemble prompt with log data
     - Send to Claude with 60s timeout
     - Parse response into ReviewResponse (summary, days_analysed, entries_analysed, hypotheses array)
@@ -83,29 +83,29 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - Handle timeout (504) and failure (503) — preserve existing hypothesis on error
     - _Requirements: 6.1, 6.2, 6.4, 6.5, 6.6, 6.10, 6.11, 6.12_
 
-  - [ ] 4.4 Implement confidence scoring logic (`backend/ai/confidence.ts`)
+  - [X] 4.4 Implement confidence scoring logic (`backend/ai/confidence.ts`)
     - Confidence label assignment: Low (0.00–0.39), Moderate (0.40–0.64), High (0.65–0.84), Very High (0.85–0.95)
     - Data sufficiency caps: <7 days → max Low, <14 days → max Moderate
     - Supporting events cap: <3 events → max 0.50
     - Confounder reduction: stress ≥7, sleep_quality ≤2, water <1.0L → reduce by ≥0.15
     - _Requirements: 6.3, 6.7, 6.8, 6.9_
 
-  - [ ] 4.5 Implement transit window correlation logic (`backend/ai/correlation.ts`)
+  - [X] 4.5 Implement transit window correlation logic (`backend/ai/correlation.ts`)
     - Given meal logs and symptom logs, identify symptoms (any dimension ≥4) within 6–24 hours after a meal
     - Return correlated pairs for hypothesis generation
     - _Requirements: 6.2_
 
-  - [ ]* 4.6 Write property tests for confidence scoring
+  - [X]* 4.6 Write property tests for confidence scoring
     - **Property 7: Confidence label assignment**
     - **Property 8: Confidence caps based on data sufficiency and supporting events**
     - **Property 9: Confounder confidence reduction**
     - **Validates: Requirements 6.3, 6.7, 6.8, 6.9**
 
-  - [ ]* 4.7 Write property test for transit window correlation
+  - [X]* 4.7 Write property test for transit window correlation
     - **Property 6: Transit window correlation correctness**
     - **Validates: Requirements 6.2**
 
-  - [ ]* 4.8 Write property test for AI response schema validation
+  - [X]* 4.8 Write property test for AI response schema validation
     - **Property 15: AI response schema validation**
     - **Validates: Requirements 5.2, 6.6**
 
@@ -248,7 +248,6 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
 
 ## Notes
 
-- Tasks marked with `*` are optional and can be skipped for faster MVP
 - Each task references specific requirements for traceability
 - Checkpoints ensure incremental validation
 - Property tests validate universal correctness properties from the design document
