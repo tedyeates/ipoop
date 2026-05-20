@@ -16,37 +16,13 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
 
 ### Phase 0 — Prerequisites
 
-- [ ] 0. Verify and install all prerequisites
-  - [ ] 0.1 Verify pnpm is installed and available
-    - Run `pnpm --version` to confirm availability
-    - If not installed: `npm install -g pnpm`
-  - [ ] 0.2 Verify Deno is installed and available
-    - Run `deno --version` to confirm availability
-    - If not installed: install via `irm https://deno.land/install.ps1 | iex` (Windows)
-  - [ ] 0.3 Verify Node.js is installed (required for pnpm/Vite)
-    - Run `node --version` to confirm (requires Node 18+)
-  - [ ] 0.4 Create frontend project and install all frontend dependencies in one step
-    - Scaffold with `pnpm create vite frontend -- --template react-ts`
-    - Install all production + dev dependencies at once:
-      - **Production:** `react-router-dom`, `lucide-react` (icons)
-      - **Dev/Build:** `tailwindcss`, `postcss`, `autoprefixer`, `@tailwindcss/forms`
-      - **Testing:** `vitest`, `@testing-library/react`, `@testing-library/jest-dom`, `@testing-library/user-event`, `jsdom`, `@vitejs/plugin-react`
-    - Run `pnpm install` and verify zero errors
-    - Run `pnpm build` to confirm the scaffold compiles
-    - Run `pnpm test --run` to confirm test runner works (even with zero tests)
-  - [ ] 0.5 Create backend project and install/cache all backend dependencies
-    - Create `backend/deno.json` with import map entries:
-      - `@libsql/client` (database — works with both local SQLite and Turso)
-      - `@anthropic-ai/sdk` (Claude API)
-    - Run `deno cache` on the import map to pre-download all dependencies
-    - Run `deno test --no-run` to confirm test runner is configured
-    - Verify `deno lint` and `deno fmt --check` work on an empty project
-  - [ ] 0.6 Confirm all tools work together
-    - From `frontend/`: `pnpm build` succeeds
-    - From `frontend/`: `pnpm test --run` succeeds (or exits cleanly with no tests)
-    - From `backend/`: `deno test` succeeds (or exits cleanly with no tests)
-    - From `backend/`: `deno lint` succeeds
-    - Document any issues in `.kiro/corrections.md`
+- [X] 0. Verify and install all prerequisites
+  - [X] 0.1 Verify pnpm is installed and available
+  - [X] 0.2 Verify Deno is installed and available
+  - [X] 0.3 Verify Node.js is installed (required for pnpm/Vite)
+  - [X] 0.4 Create frontend project and install all frontend dependencies in one step
+  - [X] 0.5 Create backend project and install/cache all backend dependencies
+  - [X] 0.6 Confirm all tools work together
 
 ---
 
