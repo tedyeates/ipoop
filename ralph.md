@@ -17,15 +17,12 @@ Read the following files to understand the project. Skip any that don't exist.
 1. `.kiro/steering/product.md` — what the product is
 2. `.kiro/steering/structure.md` — project structure conventions
 3. `.kiro/steering/tech.md` — tech stack and tooling
-4. **Requirements file** (check which exists — use the first one found):
-   - `.kiro/specs/SPECS_NAME/requirements.md` — feature requirements and exit criteria
-   - `.kiro/specs/SPECS_NAME/bugfix.md` — bugfix description and exit criteria
+4. `.kiro/specs/SPECS_NAME/requirements.md` — feature requirements and exit criteria
 5. `.kiro/specs/SPECS_NAME/design.md` — architecture and design decisions
 6. `.kiro/specs/SPECS_NAME/tasks.md` — the task list to implement
 7. `.kiro/corrections.md` — **read this FIRST and internalize every entry before doing anything else**. This is the universal corrections log shared across all specs and sessions.
 8. `.kiro/specs/SPECS_NAME/progress.md` — read the Codebase Patterns section and past progress entries
 
-**Spec type detection:** If `bugfix.md` exists (and `requirements.md` does not), this is a bugfix spec. If `requirements.md` exists, this is a feature spec. All subsequent references to "requirements" or "exit criteria" in this document refer to whichever file was found above.
 
 ## Phase 2: Pick ONE Task
 

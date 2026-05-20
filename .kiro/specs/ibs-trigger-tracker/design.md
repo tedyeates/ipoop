@@ -581,93 +581,70 @@ All errors return a consistent `ApiError` JSON shape:
 
 ## Testing Strategy
 
-### Testing Approach
+### Testing Philosophy
 
-The project uses a dual testing strategy:
+**Mock only what you cannot run locally.** The only external dependency that gets mocked is the Anthropic Claude API. Everything else — database, validation, routing, CORS — is tested against real local implementations. The user tests actual AI integration manually.
 
-1. **Property-based tests** — verify universal correctness properties across randomised inputs (100+ iterations per property)
-2. **Example-based unit tests** — verify specific scenarios, edge cases, and UI interactions
-3. **Integration tests** — verify external service interactions (Claude API, Turso) with mocks
+### Frontend Tests — Component Display
 
-### Property-Based Testing
+**Framework:** Vitest + React Testing Library
 
-**Library:** [fast-check](https://github.com/dubzzz/fast-check) (TypeScript, works with both Deno and Node/Vitest)
+Frontend tests verify that components **render correctly with different data inputs**. They do not test business logic, API integration, or navigation flows — those are covered by backend tests and manual verification.
 
-**Configuration:**
-- Minimum 100 iterations per property test
-- Each test tagged with: `Feature: ibs-trigger-tracker, Property {N}: {title}`
-- Properties test pure logic functions extracted from route handlers
+**What is tested:**
+- Each component renders correctly with populated data
+- Each component renders correctly with empty/missing data (empty states)
+- Each component renders correctly with edge-case data (max-length strings, boundary values)
+- Conditional rendering (e.g., scan results shown/hidden, error messages visible/hidden)
+- Correct labels, values, and structure in the DOM
 
-**Property Test Targets:**
+**What is NOT tested on the frontend:**
+- API call logic (tested on backend)
+- Form submission flows (verified manually + backend route tests)
+- Navigation (verified manually)
+- Business logic (lives in backend, tested there)
 
-| Property | Module Under Test | Key Generators |
-|----------|-------------------|----------------|
-| 1: Round-trip persistence | `db/queries.ts` | Random valid log entries (all types) |
-| 2: Numeric validation | `lib/validate.ts` | Random integers/decimals inside and outside ranges |
-| 3: Description length | `lib/validate.ts` | Random strings of varying lengths (0–1000) |
-| 4: Enum validation | `lib/validate.ts` | Random strings + valid enum members |
-| 5: FODMAP subset | `lib/validate.ts` | Random subsets of {F,O,D,M,P} + invalid chars |
-| 6: Transit window | `ai/correlation.ts` | Random timestamp pairs with known offsets |
-| 7: Confidence labels | `ai/confidence.ts` | Random floats in [0.00, 0.95] |
-| 8: Confidence caps | `ai/confidence.ts` | Random day counts + event counts + scores |
-| 9: Confounder reduction | `ai/confidence.ts` | Random scores + confounder states |
-| 10: CORS enforcement | `lib/cors.ts` | Random origin strings |
-| 11: History grouping | `db/queries.ts` | Random entries with varying timestamps |
-| 12: JSON export | `routes/export.ts` | Random multi-table datasets |
-| 13: CSV export | `routes/export.ts` | Random multi-table datasets |
-| 14: ULID/ISO8601 format | `lib/ulid.ts` | Generated IDs and timestamps |
-| 15: AI response schema | `ai/parsers.ts` | Random JSON objects (valid + invalid shapes) |
-| 16: Export filename | `routes/export.ts` | Random dates + format selections |
+### Backend Tests — Real Local SQLite, No DB Mocks
 
-### Unit Tests (Example-Based)
+**Framework:** Deno test runner
 
-**Frontend:** Vitest + React Testing Library
-- Form validation feedback (specific invalid inputs)
-- Component rendering (BottomNav, HypothesisCard, etc.)
-- Navigation flows (submit → dashboard)
-- Empty states and placeholders
-- Disclaimer presence on all pages
+**Database:** Each test gets a fresh local SQLite file (via `@libsql/client` connecting to a temp file with schema applied). This is the same `@libsql/client` interface used in production with Turso — the only difference is the connection URL.
 
-**Backend:** Deno test runner
-- Enum acceptance (each valid value + representative invalid)
-- Default values (scan_used defaults to 0)
-- Single hypothesis record constraint (overwrite behaviour)
-- File type validation for scans
-- Image size rejection at 5MB boundary
+**What is tested against real SQLite (no mocking):**
+- Validation utilities — all boundary values, all enum values, compound validation
+- Database queries — insert/select round-trips, filtering, ordering, null preservation, upsert behaviour
+- Route handlers — full request → validation → DB → response pipeline
+- CORS middleware — origin matching, preflight responses
+- ULID generation — format, uniqueness, sortability
+- Confidence scoring — label assignment, caps, confounder reduction (pure functions)
+- Transit window correlation — timestamp math (pure function)
+- AI response parsing — valid/invalid JSON structures (pure function)
+- Data export — JSON and CSV output with real DB data
 
-### Integration Tests
-
-**Mocked external services:**
-- Claude API responses (scan + review) — mock with representative payloads
-- Turso database — use in-memory libSQL for fast integration tests
-- CORS — test with various Origin headers
-
-**Key integration scenarios:**
-- Full meal logging flow with photo scan
-- AI review with insufficient data (< 7 days)
-- AI review with confounders present
-- Database failure handling (mock connection error)
-- Export with empty tables
+**What is mocked (only the Claude API):**
+- Scan route tests mock the Anthropic SDK to return representative responses
+- Review route tests mock the Anthropic SDK to return representative responses
+- Tests verify: correct response parsing, error handling (timeout, unavailable, malformed), that DB operations around AI calls work correctly
 
 ### Test Organisation
 
 ```
 frontend/
 ├── src/__tests__/
-│   ├── components/       # Component unit tests
-│   ├── pages/            # Page-level integration tests
-│   └── lib/              # Utility function tests
+│   ├── components/       # Component display tests
+│   └── pages/            # Page display tests (with various data states)
 
 backend/
 ├── tests/
-│   ├── properties/       # Property-based tests (fast-check)
-│   ├── unit/             # Example-based unit tests
-│   └── integration/      # Integration tests with mocks
+│   ├── lib/              # Validation, ULID, CORS tests
+│   ├── db/               # Database query tests (real SQLite)
+│   ├── routes/           # Route handler tests (real SQLite, mocked AI only)
+│   └── ai/              # Confidence, correlation, parser tests (pure functions)
 ```
 
 ### CI Pipeline
 
-1. `pnpm test` — frontend unit + property tests (Vitest)
-2. `deno test` — backend unit + property + integration tests
+1. `pnpm test` — frontend component display tests (Vitest)
+2. `deno test` — backend tests (real local SQLite, mocked AI only)
 3. `pnpm build` — verify frontend builds without errors
 4. `deno lint && deno fmt --check` — code quality
