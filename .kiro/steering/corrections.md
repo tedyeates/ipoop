@@ -31,6 +31,15 @@ For unresolved issues:
 - ❌ UNRESOLVED: [description of issue that couldn't be fixed]
 ```
 
+## Subagent Delegation
+
+When delegating tasks to subagents (invoke_sub_agent), you MUST include both this steering file AND the corrections log as context files:
+
+- `.kiro/steering/corrections.md` (this file — so subagents know the rules)
+- `.kiro/corrections.md` (the log — so subagents can read existing corrections and append new ones)
+
+Subagents MUST follow the same correction rules: read the log before starting, append entries when errors occur.
+
 ## Corrections Log
 
 #[[file:.kiro/corrections.md]]
