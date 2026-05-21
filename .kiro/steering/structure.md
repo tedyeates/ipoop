@@ -1,31 +1,7 @@
+---
+inclusion: manual
+---
 # Project Structure
-
-## High-Level Layout
-
-```
-/
-├── frontend/              # React SPA (Vite + pnpm)
-│   ├── src/
-│   │   ├── components/    # Reusable UI components
-│   │   ├── pages/         # Route-level page components
-│   │   ├── hooks/         # Custom React hooks
-│   │   ├── lib/           # API client, utilities
-│   │   └── assets/        # Static assets
-│   ├── public/
-│   ├── index.html
-│   ├── tailwind.config.js
-│   ├── vite.config.ts
-│   └── package.json
-│
-├── backend/               # Deno Deploy edge functions
-│   ├── routes/            # API route handlers
-│   ├── db/                # Database schema, migrations, queries
-│   ├── ai/               # Claude prompts and AI integration
-│   ├── lib/              # Shared utilities
-│   └── deno.json         # Deno config & tasks
-│
-└── ibs-tracker-spec.md   # Project specification (source of truth)
-```
 
 ## Frontend Routes
 
@@ -60,7 +36,7 @@
 - `symptom_logs` — symptom severity scores
 - `hypotheses` — AI-generated trigger hypotheses (single row, overwritten each review)
 
-## Conventions
+## UI Conventions
 - Mobile-first, single-column layouts
 - Bottom navigation bar (5 items: Home, Meal, Stool, Context, Symptoms)
 - Minimum 44px tap targets
