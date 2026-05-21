@@ -28,15 +28,15 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
 
 ### Phase 1 — Frontend (Dummy Data)
 
-- [ ] 1. Frontend project setup
-  - [ ] 1.1 Configure frontend project structure
+- [X] 1. Frontend project setup
+  - [X] 1.1 Configure frontend project structure
     - Configure Tailwind CSS v3 (`tailwind.config.js`, PostCSS) — deps already installed in 0.4
     - Set up React Router with all routes (/, /log/meal, /log/stool, /log/context, /log/symptoms, /history, /hypotheses, /settings)
     - Create `frontend/src/lib/types.ts` with shared TypeScript interfaces (matching API contracts from design doc)
     - Configure Vitest in `vite.config.ts` (jsdom environment, setup file for testing-library matchers)
     - _Requirements: 11.1, 11.3_
 
-  - [ ] 1.2 Create mock data layer
+  - [X] 1.2 Create mock data layer
     - Create `frontend/src/mocks/data.ts` — seed dummy data for all 4 log types + hypotheses (realistic sample entries covering various states)
     - Create `frontend/src/mocks/api.ts` — mock API functions that read/write to an in-memory store (simulates POST/GET with realistic delays)
     - Mock functions: `createMeal`, `createStool`, `createContext`, `createSymptom`, `getMeals`, `getStools`, `getContext`, `getSymptoms`, `getHypotheses`, `runReview`, `scanIngredients`, `exportData`
@@ -44,7 +44,7 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - Include simulated loading delays (300–800ms) to test loading states
     - _Requirements: all logging + retrieval requirements_
 
-  - [ ] 1.3 Create API client abstraction
+  - [X] 1.3 Create API client abstraction
     - Create `frontend/src/lib/api.ts` — exports the same interface regardless of whether mocks or real backend are used
     - Create `frontend/src/hooks/useApi.ts` — generic hook with loading/error/data states
     - Use an environment flag (`VITE_USE_MOCKS=true`) to toggle between mock and real implementations

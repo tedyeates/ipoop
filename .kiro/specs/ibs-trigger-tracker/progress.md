@@ -7,3 +7,10 @@
 - Tools used: Default tools only
 - Corrections added: vitest/config import (not vite), expected exit codes for empty test suites
 ---
+
+## 2026-05-20 - Task 1: Frontend project setup
+- What was implemented: Configured React Router with all 8 routes (placeholder page components). Created `lib/types.ts` with all shared TypeScript interfaces matching API contracts. Created `mocks/data.ts` with realistic seed data for all 4 log types + hypotheses (edge cases included). Created `mocks/api.ts` with all mock functions (CRUD + scan + review + export) with simulated delays. Created `lib/api.ts` API client abstraction with mock/real toggle via `VITE_USE_MOCKS`. Created `hooks/useApi.ts` generic hook with loading/error/data states. Created `lib/validators.ts` with client-side validation for all form types.
+- Files changed: `frontend/src/App.tsx`, `frontend/src/lib/types.ts`, `frontend/src/lib/api.ts`, `frontend/src/lib/validators.ts`, `frontend/src/hooks/useApi.ts`, `frontend/src/mocks/data.ts`, `frontend/src/mocks/api.ts`, `frontend/src/pages/DashboardPage.tsx`, `frontend/src/pages/MealLogPage.tsx`, `frontend/src/pages/StoolLogPage.tsx`, `frontend/src/pages/ContextLogPage.tsx`, `frontend/src/pages/SymptomLogPage.tsx`, `frontend/src/pages/HistoryPage.tsx`, `frontend/src/pages/HypothesesPage.tsx`, `frontend/src/pages/SettingsPage.tsx`
+- Tools used: Default tools only
+- Corrections added: None (no errors encountered)
+---
