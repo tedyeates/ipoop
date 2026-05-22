@@ -74,8 +74,8 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - `IngredientBreakdown.tsx` — expandable scan results display
     - _Requirements: 8.2, 9.1, 9.2_
 
-- [ ] 3. Frontend logging pages
-  - [ ] 3.1 Implement Meal Log page (`MealLogPage.tsx`)
+- [x] 3. Frontend logging pages
+  - [x] 3.1 Implement Meal Log page (`MealLogPage.tsx`)
     - Form with: description (required, max 500), meal_type select, FODMAP multi-select checkboxes, portion_size select, eating_speed select
     - Photo capture button triggering mock ingredient scan flow
     - On scan success: pre-populate description, tick FODMAP flags, show ingredient breakdown
@@ -83,19 +83,19 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - On submit: call mock API, show success feedback, navigate to dashboard
     - _Requirements: 1.1–1.8, 5.1, 5.3, 5.4, 5.8, 5.9, 11.4, 13.3_
 
-  - [ ] 3.2 Implement Stool Log page (`StoolLogPage.tsx`)
+  - [x] 3.2 Implement Stool Log page (`StoolLogPage.tsx`)
     - Form with: Bristol type picker (1–7, required), frequency, urgency toggle, pain score (0–10), blood toggle, notes
     - Client-side validation
     - On submit: call mock API, navigate to dashboard
     - _Requirements: 2.1–2.4, 11.4_
 
-  - [ ] 3.3 Implement Context Log page (`ContextLogPage.tsx`)
+  - [x] 3.3 Implement Context Log page (`ContextLogPage.tsx`)
     - Form with all optional fields: stress (1–10), sleep hours, sleep quality (1–5), water litres, exercise type select, exercise duration, caffeine mg, alcohol units, medications, menstrual phase select, notes
     - All fields optional but at least one required for submission
     - On submit: call mock API, navigate to dashboard
     - _Requirements: 3.1–3.9, 11.4_
 
-  - [ ] 3.4 Implement Symptom Log page (`SymptomLogPage.tsx`)
+  - [x] 3.4 Implement Symptom Log page (`SymptomLogPage.tsx`)
     - Form with 6 required severity sliders (0–10): bloating, cramping, nausea, urgency, fatigue, overall
     - Optional notes field (max 1000 chars)
     - On submit: call mock API, navigate to dashboard, show success confirmation
