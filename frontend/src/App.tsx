@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AppLayout from "./components/AppLayout";
 import DashboardPage from "./pages/DashboardPage";
 import MealLogPage from "./pages/MealLogPage";
 import StoolLogPage from "./pages/StoolLogPage";
@@ -11,16 +12,18 @@ import SettingsPage from "./pages/SettingsPage";
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<DashboardPage />} />
-        <Route path="/log/meal" element={<MealLogPage />} />
-        <Route path="/log/stool" element={<StoolLogPage />} />
-        <Route path="/log/context" element={<ContextLogPage />} />
-        <Route path="/log/symptoms" element={<SymptomLogPage />} />
-        <Route path="/history" element={<HistoryPage />} />
-        <Route path="/hypotheses" element={<HypothesesPage />} />
-        <Route path="/settings" element={<SettingsPage />} />
-      </Routes>
+      <AppLayout>
+        <Routes>
+          <Route path="/" element={<DashboardPage />} />
+          <Route path="/log/meal" element={<MealLogPage />} />
+          <Route path="/log/stool" element={<StoolLogPage />} />
+          <Route path="/log/context" element={<ContextLogPage />} />
+          <Route path="/log/symptoms" element={<SymptomLogPage />} />
+          <Route path="/history" element={<HistoryPage />} />
+          <Route path="/hypotheses" element={<HypothesesPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
+        </Routes>
+      </AppLayout>
     </BrowserRouter>
   );
 }

@@ -111,11 +111,13 @@ export interface ScanResponse {
   notes?: string;
 }
 
+export type ConfidenceLabel = "Low" | "Moderate" | "High" | "Very High";
+
 export interface Hypothesis {
   trigger_name: string;
   fodmap_category: string;
   confidence_score: number;
-  confidence_label: "Low" | "Moderate" | "High" | "Very High";
+  confidence_label: ConfidenceLabel;
   direction: "worsens" | "improves" | "unclear";
   symptom_pattern: string;
   supporting_events: number;

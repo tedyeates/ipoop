@@ -51,15 +51,15 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - Create `frontend/src/lib/validators.ts` — client-side form validation (mirrors backend rules)
     - _Requirements: 7.5, 11.4_
 
-- [ ] 2. Shared UI components
-  - [ ] 2.1 Create layout and navigation components
+- [x] 2. Shared UI components
+  - [x] 2.1 Create layout and navigation components
     - `BottomNav.tsx` — fixed bottom nav with 5 items (Home, Meal, Stool, Context, Symptoms), icon + label, equal spacing, 44px min tap targets
     - `AppLayout.tsx` — wraps all pages with BottomNav and footer Disclaimer
     - `Disclaimer.tsx` — medical disclaimer component (footer + contextual variants)
     - `LoadingSpinner.tsx` — loading state indicator
     - _Requirements: 11.1, 11.2, 11.5, 13.1, 13.2_
 
-  - [ ] 2.2 Create form input components
+  - [x] 2.2 Create form input components
     - `QuickLogButton.tsx` — reusable quick-log action button (44px min)
     - `FodmapCheckboxes.tsx` — multi-select FODMAP category picker (F/O/D/M/P)
     - `BristolPicker.tsx` — visual Bristol scale 1–7 selector
@@ -67,7 +67,7 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - `PhotoCapture.tsx` — camera/file input (validate type + 5MB size)
     - _Requirements: 1.2, 2.1, 4.1, 5.1_
 
-  - [ ] 2.3 Create display components
+  - [x] 2.3 Create display components
     - `HypothesisCard.tsx` — trigger name, FODMAP category, confidence score + visual badge + label, direction, symptom pattern, supporting/contradicting counts
     - `ConfidenceBadge.tsx` — visual confidence indicator (colour-coded by label: Low/Moderate/High/Very High)
     - `LogEntryCard.tsx` — type indicator + summary (meal: description + FODMAP; stool: Bristol + pain; context: stress + sleep; symptom: overall)
