@@ -20,7 +20,6 @@ export function validateMeal(data: {
 export function validateStool(data: {
   bristol_type?: number;
   pain_score?: number;
-  frequency?: number;
 }): ValidationErrors {
   const errors: ValidationErrors = {};
   if (data.bristol_type == null)
@@ -29,11 +28,6 @@ export function validateStool(data: {
     errors.bristol_type = "Bristol type must be 1–7";
   if (data.pain_score != null && (data.pain_score < 0 || data.pain_score > 10))
     errors.pain_score = "Pain score must be 0–10";
-  if (
-    data.frequency != null &&
-    (data.frequency < 1 || data.frequency > 20)
-  )
-    errors.frequency = "Frequency must be 1–20";
   return errors;
 }
 

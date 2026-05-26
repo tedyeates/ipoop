@@ -16,27 +16,27 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
 
 ### Phase 0 — Prerequisites
 
-- [X] 0. Verify and install all prerequisites
-  - [X] 0.1 Verify pnpm is installed and available
-  - [X] 0.2 Verify Deno is installed and available
-  - [X] 0.3 Verify Node.js is installed (required for pnpm/Vite)
-  - [X] 0.4 Create frontend project and install all frontend dependencies in one step
-  - [X] 0.5 Create backend project and install/cache all backend dependencies
-  - [X] 0.6 Confirm all tools work together
+- [x] 0. Verify and install all prerequisites
+  - [x] 0.1 Verify pnpm is installed and available
+  - [x] 0.2 Verify Deno is installed and available
+  - [x] 0.3 Verify Node.js is installed (required for pnpm/Vite)
+  - [x] 0.4 Create frontend project and install all frontend dependencies in one step
+  - [x] 0.5 Create backend project and install/cache all backend dependencies
+  - [x] 0.6 Confirm all tools work together
 
 ---
 
 ### Phase 1 — Frontend (Dummy Data)
 
-- [X] 1. Frontend project setup
-  - [X] 1.1 Configure frontend project structure
+- [x] 1. Frontend project setup
+  - [x] 1.1 Configure frontend project structure
     - Configure Tailwind CSS v3 (`tailwind.config.js`, PostCSS) — deps already installed in 0.4
     - Set up React Router with all routes (/, /log/meal, /log/stool, /log/context, /log/symptoms, /history, /hypotheses, /settings)
     - Create `frontend/src/lib/types.ts` with shared TypeScript interfaces (matching API contracts from design doc)
     - Configure Vitest in `vite.config.ts` (jsdom environment, setup file for testing-library matchers)
     - _Requirements: 11.1, 11.3_
 
-  - [X] 1.2 Create mock data layer
+  - [x] 1.2 Create mock data layer
     - Create `frontend/src/mocks/data.ts` — seed dummy data for all 4 log types + hypotheses (realistic sample entries covering various states)
     - Create `frontend/src/mocks/api.ts` — mock API functions that read/write to an in-memory store (simulates POST/GET with realistic delays)
     - Mock functions: `createMeal`, `createStool`, `createContext`, `createSymptom`, `getMeals`, `getStools`, `getContext`, `getSymptoms`, `getHypotheses`, `runReview`, `scanIngredients`, `exportData`
@@ -44,7 +44,7 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - Include simulated loading delays (300–800ms) to test loading states
     - _Requirements: all logging + retrieval requirements_
 
-  - [X] 1.3 Create API client abstraction
+  - [x] 1.3 Create API client abstraction
     - Create `frontend/src/lib/api.ts` — exports the same interface regardless of whether mocks or real backend are used
     - Create `frontend/src/hooks/useApi.ts` — generic hook with loading/error/data states
     - Use an environment flag (`VITE_USE_MOCKS=true`) to toggle between mock and real implementations
@@ -101,8 +101,8 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - On submit: call mock API, navigate to dashboard, show success confirmation
     - _Requirements: 4.1–4.5, 11.4_
 
-- [ ] 4. Frontend data pages
-  - [ ] 4.1 Implement Dashboard page (`DashboardPage.tsx`)
+- [x] 4. Frontend data pages
+  - [x] 4.1 Implement Dashboard page (`DashboardPage.tsx`)
     - Display today's log count, most recent symptom overall score, most recent Bristol type
     - Hypothesis teaser card (highest confidence trigger name, FODMAP category, confidence score)
     - Quick-log buttons for all 4 loggers
@@ -111,7 +111,7 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - `useDashboardSummary.ts` hook for data fetching (from mock layer)
     - _Requirements: 7.1, 7.2, 7.3, 7.4, 7.5_
 
-  - [ ] 4.2 Implement History page (`HistoryPage.tsx`)
+  - [x] 4.2 Implement History page (`HistoryPage.tsx`)
     - Scrollable list grouped by day (reverse chronological), date headings
     - Uses `LogEntryCard.tsx` for each entry
     - Initial load: 14 days; infinite scroll loads next 7 days per batch
@@ -119,7 +119,7 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - Empty state when no entries exist
     - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5_
 
-  - [ ] 4.3 Implement Hypotheses page (`HypothesesPage.tsx`)
+  - [x] 4.3 Implement Hypotheses page (`HypothesesPage.tsx`)
     - Display AI summary paragraph above hypothesis cards
     - Uses `HypothesisCard.tsx` and `ConfidenceBadge.tsx`
     - "Run AI Review" button with loading state (disable + spinner during mock request)
@@ -129,13 +129,13 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - Contextual AI disclaimer
     - _Requirements: 9.1–9.6, 13.3_
 
-  - [ ] 4.4 Implement Settings page (`SettingsPage.tsx`)
+  - [x] 4.4 Implement Settings page (`SettingsPage.tsx`)
     - Data export section with JSON/CSV format selection
     - Export button triggers mock export and initiates file download
     - _Requirements: 10.1–10.5_
 
-- [ ] 5. Frontend component tests
-  - [ ] 5.1 Write component display tests for shared components
+- [x] 5. Frontend component tests
+  - [x] 5.1 Write component display tests for shared components
     - `BottomNav` — renders all 5 nav items with correct labels and icons, highlights active route
     - `Disclaimer` — renders disclaimer text in both footer and contextual variants
     - `LoadingSpinner` — renders spinner element
@@ -148,7 +148,7 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - `LogEntryCard` — renders correctly for each log type (meal with FODMAP flags, stool with Bristol type, context with stress/sleep, symptom with overall score)
     - `IngredientBreakdown` — renders ingredient list, FODMAP detail, expands/collapses
 
-  - [ ] 5.2 Write component display tests for page components
+  - [x] 5.2 Write component display tests for page components
     - `DashboardPage` — renders with data (log counts, hypothesis teaser, quick-log buttons); renders empty state (no logs, no hypotheses, CTA visible)
     - `HistoryPage` — renders grouped entries by day with date headings; renders empty state
     - `HypothesesPage` — renders with hypothesis data (summary, cards, last review date); renders empty state (prompt to run review); renders loading state; renders error state with retry
@@ -158,7 +158,7 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - `ContextLogPage` — renders all optional fields; shows error when submitting with no fields filled
     - `SymptomLogPage` — renders all 6 severity sliders; shows validation errors when sliders not set
 
-- [ ] 6. Checkpoint — Frontend review
+- [x] 6. Checkpoint — Frontend review
   - All pages functional against mock data
   - All component tests pass
   - Navigation flows work end-to-end (≤3 taps from icon to submission)

@@ -28,7 +28,6 @@ export interface StoolLog {
   id: string;
   logged_at: string;
   bristol_type: number;
-  frequency: number | null;
   urgency: number | null;
   pain_score: number | null;
   blood: number | null;
@@ -37,7 +36,6 @@ export interface StoolLog {
 
 export interface CreateStoolRequest {
   bristol_type: number;
-  frequency?: number;
   urgency?: boolean;
   pain_score?: number;
   blood?: boolean;

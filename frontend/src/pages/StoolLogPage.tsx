@@ -13,7 +13,6 @@ export default function StoolLogPage() {
   const { loading, error, execute } = useApi<StoolLog>();
 
   const [bristolType, setBristolType] = useState<1 | 2 | 3 | 4 | 5 | 6 | 7 | null>(null);
-  const [frequency, setFrequency] = useState("");
   const [urgency, setUrgency] = useState(false);
   const [painScore, setPainScore] = useState(0);
   const [painTouched, setPainTouched] = useState(false);
@@ -24,11 +23,9 @@ export default function StoolLogPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
-    const freqNum = frequency.trim() ? Number(frequency) : undefined;
     const validationErrors = validateStool({
       bristol_type: bristolType ?? undefined,
       pain_score: painTouched ? painScore : undefined,
-      frequency: freqNum,
     });
 
     if (Object.keys(validationErrors).length > 0) {
@@ -41,7 +38,6 @@ export default function StoolLogPage() {
     const req: CreateStoolRequest = {
       bristol_type: bristolType!,
     };
-    if (freqNum != null) req.frequency = freqNum;
     if (urgency) req.urgency = true;
     if (painTouched) req.pain_score = painScore;
     if (blood) req.blood = true;
@@ -79,30 +75,6 @@ export default function StoolLogPage() {
           {errors.bristol_type && (
             <p className="mt-1 text-sm text-red-600" role="alert">
               {errors.bristol_type}
-            </p>
-          )}
-        </div>
-
-        {/* Frequency */}
-        <div>
-          <label htmlFor="frequency" className="block text-sm font-medium text-gray-700 mb-1">
-            Frequency (times today)
-          </label>
-          <input
-            id="frequency"
-            type="number"
-            inputMode="numeric"
-            min={1}
-            max={20}
-            value={frequency}
-            onChange={(e) => setFrequency(e.target.value)}
-            disabled={loading}
-            placeholder="1–20"
-            className="w-full min-h-[44px] px-3 py-2 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 disabled:opacity-50"
-          />
-          {errors.frequency && (
-            <p className="mt-1 text-sm text-red-600" role="alert">
-              {errors.frequency}
             </p>
           )}
         </div>

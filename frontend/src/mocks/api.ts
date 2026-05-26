@@ -55,7 +55,6 @@ export async function createStool(req: CreateStoolRequest): Promise<StoolLog> {
     id: ulid(),
     logged_at: new Date().toISOString(),
     bristol_type: req.bristol_type,
-    frequency: req.frequency ?? null,
     urgency: req.urgency ? 1 : 0,
     pain_score: req.pain_score ?? null,
     blood: req.blood ? 1 : 0,
