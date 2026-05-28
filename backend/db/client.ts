@@ -27,7 +27,8 @@ export function getDb(): Client {
     _client = createClient({ url, authToken });
   } else {
     // Local SQLite file for development
-    _client = createClient({ url: "file:data/local.db" });
+    const localPath = Deno.env.get("LOCAL_DB_PATH") ?? "data/local.db";
+    _client = createClient({ url: `file:${localPath}` });
   }
 
   return _client;

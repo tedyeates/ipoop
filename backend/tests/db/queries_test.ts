@@ -161,6 +161,18 @@ Deno.test("getStools - filters by since", async () => {
   assertEquals(rows[0].bristol_type, 5);
 });
 
+Deno.test("getStools - returns descending order", async () => {
+  const db = await freshDb();
+  await insertStool({ id: "01A", logged_at: "2024-01-10T08:00:00.000Z", bristol_type: 2 }, db);
+  await insertStool({ id: "01B", logged_at: "2024-01-12T08:00:00.000Z", bristol_type: 4 }, db);
+  await insertStool({ id: "01C", logged_at: "2024-01-11T08:00:00.000Z", bristol_type: 3 }, db);
+
+  const rows = await getStools(undefined, db);
+  assertEquals(rows[0].bristol_type, 4);
+  assertEquals(rows[1].bristol_type, 3);
+  assertEquals(rows[2].bristol_type, 2);
+});
+
 // ─── Context Queries ─────────────────────────────────────────────────────────
 
 Deno.test("insertContext + getContext - round trip", async () => {
@@ -210,6 +222,28 @@ Deno.test("insertContext - null optional fields", async () => {
   assertEquals(rows[0].notes, null);
 });
 
+Deno.test("getContext - filters by since", async () => {
+  const db = await freshDb();
+  await insertContext({ id: "01A", logged_at: "2024-01-01T08:00:00.000Z", stress_score: 3 }, db);
+  await insertContext({ id: "01B", logged_at: "2024-01-15T08:00:00.000Z", stress_score: 8 }, db);
+
+  const rows = await getContext({ since: "2024-01-10T00:00:00.000Z" }, db);
+  assertEquals(rows.length, 1);
+  assertEquals(rows[0].stress_score, 8);
+});
+
+Deno.test("getContext - returns descending order", async () => {
+  const db = await freshDb();
+  await insertContext({ id: "01A", logged_at: "2024-01-10T08:00:00.000Z", stress_score: 2 }, db);
+  await insertContext({ id: "01B", logged_at: "2024-01-12T08:00:00.000Z", stress_score: 7 }, db);
+  await insertContext({ id: "01C", logged_at: "2024-01-11T08:00:00.000Z", stress_score: 5 }, db);
+
+  const rows = await getContext(undefined, db);
+  assertEquals(rows[0].stress_score, 7);
+  assertEquals(rows[1].stress_score, 5);
+  assertEquals(rows[2].stress_score, 2);
+});
+
 // ─── Symptom Queries ─────────────────────────────────────────────────────────
 
 Deno.test("insertSymptom + getSymptoms - round trip", async () => {
@@ -251,6 +285,39 @@ Deno.test("getSymptoms - filters by since", async () => {
   const rows = await getSymptoms({ since: "2024-01-10T00:00:00.000Z" }, db);
   assertEquals(rows.length, 1);
   assertEquals(rows[0].overall, 9);
+});
+
+Deno.test("getSymptoms - returns descending order", async () => {
+  const db = await freshDb();
+  await insertSymptom({
+    id: "01A", logged_at: "2024-01-10T08:00:00.000Z",
+    bloating: 1, cramping: 1, nausea: 1, urgency: 1, fatigue: 1, overall: 2,
+  }, db);
+  await insertSymptom({
+    id: "01B", logged_at: "2024-01-12T08:00:00.000Z",
+    bloating: 5, cramping: 5, nausea: 5, urgency: 5, fatigue: 5, overall: 8,
+  }, db);
+  await insertSymptom({
+    id: "01C", logged_at: "2024-01-11T08:00:00.000Z",
+    bloating: 3, cramping: 3, nausea: 3, urgency: 3, fatigue: 3, overall: 5,
+  }, db);
+
+  const rows = await getSymptoms(undefined, db);
+  assertEquals(rows[0].overall, 8);
+  assertEquals(rows[1].overall, 5);
+  assertEquals(rows[2].overall, 2);
+});
+
+Deno.test("insertSymptom - null notes preserved", async () => {
+  const db = await freshDb();
+  await insertSymptom({
+    id: "01NULLNOTES",
+    logged_at: "2024-01-15T14:00:00.000Z",
+    bloating: 3, cramping: 2, nausea: 1, urgency: 4, fatigue: 2, overall: 3,
+  }, db);
+
+  const rows = await getSymptoms(undefined, db);
+  assertEquals(rows[0].notes, null);
 });
 
 // ─── Hypothesis Queries ──────────────────────────────────────────────────────

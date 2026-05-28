@@ -212,8 +212,8 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - GET handler to retrieve symptom logs
     - _Requirements: 4.1, 4.2, 4.3, 4.4_
 
-- [ ] 9. Backend tests — CRUD and validation (local SQLite, no mocks)
-  - [ ] 9.1 Write tests for validation utilities (`backend/tests/lib/validate_test.ts`)
+- [x] 9. Backend tests — CRUD and validation (local SQLite, no mocks)
+  - [x] 9.1 Write tests for validation utilities (`backend/tests/lib/validate_test.ts`)
     - Test every numeric range validator with values at boundaries (min, max, min-1, max+1)
     - Test string length validators (empty, 1 char, max, max+1, whitespace-only)
     - Test enum validators with every valid value + representative invalid values
@@ -222,7 +222,7 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - All tests run against real validation functions — no mocking
     - _Requirements: 1.7, 1.8, 2.2, 2.3, 2.4, 3.3–3.8, 4.2, 4.3_
 
-  - [ ] 9.2 Write tests for database queries (`backend/tests/db/queries_test.ts`)
+  - [x] 9.2 Write tests for database queries (`backend/tests/db/queries_test.ts`)
     - Each test gets a fresh local SQLite database (created in a temp file, schema applied)
     - Test insert + select round-trip for all 4 log tables (verify all fields preserved)
     - Test `since` parameter filtering returns only records after the given timestamp
@@ -234,7 +234,7 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - All tests use real SQLite — no mocking of the database layer
     - _Requirements: 12.1, 12.4_
 
-  - [ ] 9.3 Write tests for route handlers (`backend/tests/routes/`)
+  - [x] 9.3 Write tests for route handlers (`backend/tests/routes/`)
     - Tests call route handlers directly with constructed Request objects (no HTTP server needed)
     - Each test uses a real local SQLite database (fresh per test)
     - Test each route (meals, stools, context, symptoms) for:
@@ -248,7 +248,7 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - No mocking — tests exercise the full stack from request → validation → DB → response
     - _Requirements: 1.7, 1.8, 2.2, 2.3, 2.4, 3.3–3.8, 4.2, 4.3, 12.6_
 
-  - [~] 9.4 Write tests for ULID generation and CORS
+  - [x] 9.4 Write tests for ULID generation and CORS
     - Test ULID format (26 chars, Crockford Base32, lexicographically sortable)
     - Test ULID uniqueness (generate 1000, all distinct)
     - Test CORS allows matching origin, rejects non-matching origin
