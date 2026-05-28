@@ -8,3 +8,7 @@
 - ❌ Assumed `@testing-library/react` auto-cleanup works with vitest forks pool → ✅ Add explicit `afterEach(() => { cleanup() })` in test files (auto-cleanup may not trigger reliably with vitest's default pool)
 
 - ❌ `pnpm test --run` doubles the `--run` flag since package.json script already has `vitest --run` → ✅ Use `pnpm test` without extra flags
+
+- ❌ `@libsql/client` on Windows needs `--allow-ffi` for native SQLite bindings → ✅ Add `--allow-ffi` to all deno run/test commands that use the DB client
+
+- ❌ `applySchema` in migrate.ts filtered statements with `!s.startsWith("--")` after splitting on `;` — this dropped the first CREATE TABLE because the chunk started with SQL comments → ✅ Strip comment lines before splitting on semicolons

@@ -1,11 +1,16 @@
 {
+  "compilerOptions": {
+    "lib": ["deno.ns", "deno.unstable"]
+  },
   "tasks": {
-    "dev": "deno run --allow-net --allow-env --allow-read --allow-write --watch main.ts",
-    "start": "deno run --allow-net --allow-env --allow-read --allow-write main.ts",
-    "test": "deno test --allow-net --allow-env --allow-read --allow-write"
+    "dev": "deno run --allow-net --allow-env --allow-read --allow-write --allow-ffi --watch main.ts",
+    "start": "deno run --allow-net --allow-env --allow-read --allow-write --allow-ffi main.ts",
+    "migrate": "deno run --allow-net --allow-env --allow-read --allow-write --allow-ffi db/migrate.ts",
+    "test": "deno test --allow-net --allow-env --allow-read --allow-write --allow-ffi"
   },
   "imports": {
     "@libsql/client": "npm:@libsql/client@^0.15",
-    "@anthropic-ai/sdk": "npm:@anthropic-ai/sdk@^0.52"
+    "@anthropic-ai/sdk": "npm:@anthropic-ai/sdk@^0.52",
+    "@std/ulid": "jsr:@std/ulid@^1"
   }
 }

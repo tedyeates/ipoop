@@ -170,8 +170,8 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
 
 ### Phase 2 — Backend (Local SQLite)
 
-- [ ] 7. Backend project setup and core infrastructure
-  - [ ] 7.1 Initialise Deno backend project structure
+- [x] 7. Backend project setup and core infrastructure
+  - [x] 7.1 Initialise Deno backend project structure
     - Create `backend/` directory with `deno.json` (import map, tasks for dev/start/test)
     - Create `backend/main.ts` entry point with request routing skeleton
     - Create `backend/lib/cors.ts` CORS middleware that reads `CORS_ORIGIN` env var
@@ -179,7 +179,7 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - Create `backend/lib/ulid.ts` ULID generation utility
     - _Requirements: 12.3, 12.4_
 
-  - [ ] 7.2 Set up database client and schema (local SQLite)
+  - [x] 7.2 Set up database client and schema (local SQLite)
     - Create `backend/db/client.ts` using `@libsql/client` — in development, connect to a local SQLite file (`data/local.db`); in production, connect to Turso via env vars (`TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`)
     - Use an env var (`DATABASE_MODE=local|turso`) to switch between local file and remote Turso
     - Create `backend/db/schema.sql` with all 5 tables and indexes
@@ -187,7 +187,7 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - Create `backend/db/queries.ts` with parameterised insert/select/delete functions
     - _Requirements: 12.1, 12.4_
 
-  - [ ] 7.3 Implement server-side validation utilities
+  - [x] 7.3 Implement server-side validation utilities
     - Create `backend/lib/validate.ts` with validators for all field types
     - _Requirements: 1.7, 1.8, 2.2, 2.3, 2.4, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 4.2, 4.3_
 

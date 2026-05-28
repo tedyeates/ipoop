@@ -1,3 +1,12 @@
 {
-    "typescript.autoClosingTags": false
+    "typescript.autoClosingTags": false,
+    "deno.enable": true,
+    "deno.enablePaths": ["./backend"],
+    "deno.config": "./backend/deno.json",
+    "deno.disablePaths": ["./frontend"],
+    "typescript.tsdk": "./frontend/node_modules/typescript/lib",
+    "typescript.validate.enable": true,
+    "[typescript]": {
+        "editor.defaultFormatter": "denoland.vscode-deno"
+    }
 }
