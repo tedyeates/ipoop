@@ -9,6 +9,8 @@ import { handleMeals } from "./routes/meals.ts";
 import { handleStools } from "./routes/stools.ts";
 import { handleContext } from "./routes/context.ts";
 import { handleSymptoms } from "./routes/symptoms.ts";
+import { handleReview } from "./routes/review.ts";
+import { handleScan } from "./routes/scan.ts";
 
 /** Route a request to the appropriate handler based on URL path. */
 async function route(req: Request): Promise<Response> {
@@ -41,11 +43,11 @@ async function route(req: Request): Promise<Response> {
   }
 
   if (path === "/api/scan-ingredients") {
-    return methodNotAllowed("Scan routes not yet implemented");
+    return handleScan(req);
   }
 
   if (path === "/api/review") {
-    return methodNotAllowed("Review routes not yet implemented");
+    return handleReview(req);
   }
 
   if (path === "/api/hypotheses") {

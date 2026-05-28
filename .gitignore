@@ -1,0 +1,24 @@
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Backend test databases
+backend/data/test_*.db
+
+# Backend local dev database
+backend/data/local.db
+
+# Node
+node_modules/
+
+# Build output
+frontend/dist/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+*.sw?

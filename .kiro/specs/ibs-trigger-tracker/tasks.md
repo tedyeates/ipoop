@@ -256,25 +256,25 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - No mocking needed — these are pure functions / simple middleware
     - _Requirements: 12.3, 12.4_
 
-- [ ] 10. AI integration layer
-  - [~] 10.1 Set up Anthropic SDK client (`backend/ai/client.ts`)
+- [x] 10. AI integration layer
+  - [x] 10.1 Set up Anthropic SDK client (`backend/ai/client.ts`)
     - Initialise with `ANTHROPIC_API_KEY`, configure timeouts (15s scan, 60s review)
     - _Requirements: 6.11, 12.2_
 
-  - [~] 10.2 Implement ingredient scan prompt and route
+  - [x] 10.2 Implement ingredient scan prompt and route
     - POST handler: validate image (type + 5MB size), send to Claude vision, parse structured response
     - Response parsing validates against ScanResponse schema
     - Handle timeout (504) and unavailable (503)
     - _Requirements: 5.1, 5.2, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9_
 
-  - [~] 10.3 Implement AI review prompt and route
+  - [x] 10.3 Implement AI review prompt and route
     - POST handler: query all logs (up to 90 days) from local SQLite, assemble prompt, send to Claude, parse response
     - Parse into ReviewResponse (summary, days_analysed, entries_analysed, hypotheses array)
     - DELETE existing hypothesis, INSERT new one
     - Handle timeout (504) and failure (503) — preserve existing hypothesis on error
     - _Requirements: 6.1, 6.2, 6.4, 6.5, 6.6, 6.10, 6.11, 6.12_
 
-  - [~] 10.4 Implement confidence scoring and transit window correlation
+  - [x] 10.4 Implement confidence scoring and transit window correlation
     - `backend/ai/confidence.ts` — confidence label assignment, data sufficiency caps, confounder reduction
     - `backend/ai/correlation.ts` — transit window correlation (6–24hr between meal and symptom)
     - These are pure functions with no external dependencies
