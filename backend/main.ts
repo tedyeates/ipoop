@@ -5,6 +5,10 @@
 
 import { handlePreflight, applyCors } from "./lib/cors.ts";
 import { notFoundError, methodNotAllowed } from "./lib/errors.ts";
+import { handleMeals } from "./routes/meals.ts";
+import { handleStools } from "./routes/stools.ts";
+import { handleContext } from "./routes/context.ts";
+import { handleSymptoms } from "./routes/symptoms.ts";
 
 /** Route a request to the appropriate handler based on URL path. */
 async function route(req: Request): Promise<Response> {
@@ -19,21 +23,21 @@ async function route(req: Request): Promise<Response> {
     });
   }
 
-  // API routes — will be wired up in subsequent tasks
+  // API routes
   if (path === "/api/meals") {
-    return methodNotAllowed("Meal routes not yet implemented");
+    return handleMeals(req);
   }
 
   if (path === "/api/stools") {
-    return methodNotAllowed("Stool routes not yet implemented");
+    return handleStools(req);
   }
 
   if (path === "/api/context") {
-    return methodNotAllowed("Context routes not yet implemented");
+    return handleContext(req);
   }
 
   if (path === "/api/symptoms") {
-    return methodNotAllowed("Symptom routes not yet implemented");
+    return handleSymptoms(req);
   }
 
   if (path === "/api/scan-ingredients") {

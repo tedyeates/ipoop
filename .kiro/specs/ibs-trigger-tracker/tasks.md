@@ -191,23 +191,23 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - Create `backend/lib/validate.ts` with validators for all field types
     - _Requirements: 1.7, 1.8, 2.2, 2.3, 2.4, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 4.2, 4.3_
 
-- [ ] 8. Backend CRUD route handlers
-  - [ ] 8.1 Implement meal log route (`backend/routes/meals.ts`)
+- [x] 8. Backend CRUD route handlers
+  - [x] 8.1 Implement meal log route (`backend/routes/meals.ts`)
     - POST handler with full validation, ULID + timestamp generation, DB insert
     - GET handler to retrieve meals (with optional `since` timestamp filter)
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8_
 
-  - [ ] 8.2 Implement stool log route (`backend/routes/stools.ts`)
+  - [x] 8.2 Implement stool log route (`backend/routes/stools.ts`)
     - POST handler with validation, ULID + timestamp, DB insert
     - GET handler to retrieve stool logs
     - _Requirements: 2.1, 2.2, 2.3, 2.4_
 
-  - [ ] 8.3 Implement context log route (`backend/routes/context.ts`)
+  - [x] 8.3 Implement context log route (`backend/routes/context.ts`)
     - POST handler with validation (all optional, at least one required), DB insert
     - GET handler to retrieve context logs
     - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9_
 
-  - [ ] 8.4 Implement symptom log route (`backend/routes/symptoms.ts`)
+  - [x] 8.4 Implement symptom log route (`backend/routes/symptoms.ts`)
     - POST handler with validation (all 6 required), DB insert
     - GET handler to retrieve symptom logs
     - _Requirements: 4.1, 4.2, 4.3, 4.4_
@@ -248,7 +248,7 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - No mocking — tests exercise the full stack from request → validation → DB → response
     - _Requirements: 1.7, 1.8, 2.2, 2.3, 2.4, 3.3–3.8, 4.2, 4.3, 12.6_
 
-  - [ ] 9.4 Write tests for ULID generation and CORS
+  - [~] 9.4 Write tests for ULID generation and CORS
     - Test ULID format (26 chars, Crockford Base32, lexicographically sortable)
     - Test ULID uniqueness (generate 1000, all distinct)
     - Test CORS allows matching origin, rejects non-matching origin
@@ -257,31 +257,31 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - _Requirements: 12.3, 12.4_
 
 - [ ] 10. AI integration layer
-  - [ ] 10.1 Set up Anthropic SDK client (`backend/ai/client.ts`)
+  - [~] 10.1 Set up Anthropic SDK client (`backend/ai/client.ts`)
     - Initialise with `ANTHROPIC_API_KEY`, configure timeouts (15s scan, 60s review)
     - _Requirements: 6.11, 12.2_
 
-  - [ ] 10.2 Implement ingredient scan prompt and route
+  - [~] 10.2 Implement ingredient scan prompt and route
     - POST handler: validate image (type + 5MB size), send to Claude vision, parse structured response
     - Response parsing validates against ScanResponse schema
     - Handle timeout (504) and unavailable (503)
     - _Requirements: 5.1, 5.2, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9_
 
-  - [ ] 10.3 Implement AI review prompt and route
+  - [~] 10.3 Implement AI review prompt and route
     - POST handler: query all logs (up to 90 days) from local SQLite, assemble prompt, send to Claude, parse response
     - Parse into ReviewResponse (summary, days_analysed, entries_analysed, hypotheses array)
     - DELETE existing hypothesis, INSERT new one
     - Handle timeout (504) and failure (503) — preserve existing hypothesis on error
     - _Requirements: 6.1, 6.2, 6.4, 6.5, 6.6, 6.10, 6.11, 6.12_
 
-  - [ ] 10.4 Implement confidence scoring and transit window correlation
+  - [~] 10.4 Implement confidence scoring and transit window correlation
     - `backend/ai/confidence.ts` — confidence label assignment, data sufficiency caps, confounder reduction
     - `backend/ai/correlation.ts` — transit window correlation (6–24hr between meal and symptom)
     - These are pure functions with no external dependencies
     - _Requirements: 6.2, 6.3, 6.7, 6.8, 6.9_
 
 - [ ] 11. Backend tests — AI layer
-  - [ ] 11.1 Write tests for confidence scoring (`backend/tests/ai/confidence_test.ts`)
+  - [~] 11.1 Write tests for confidence scoring (`backend/tests/ai/confidence_test.ts`)
     - Test label assignment for scores at each boundary (0.00, 0.39, 0.40, 0.64, 0.65, 0.84, 0.85, 0.95)
     - Test data sufficiency caps (<7 days → max Low, <14 days → max Moderate)
     - Test supporting events cap (<3 events → max 0.50)
@@ -290,7 +290,7 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - No mocking — these are pure functions
     - _Requirements: 6.3, 6.7, 6.8, 6.9_
 
-  - [ ] 11.2 Write tests for transit window correlation (`backend/tests/ai/correlation_test.ts`)
+  - [~] 11.2 Write tests for transit window correlation (`backend/tests/ai/correlation_test.ts`)
     - Test symptom within 6–24hr window after meal → correlated
     - Test symptom before 6hr → not correlated
     - Test symptom after 24hr → not correlated
@@ -300,7 +300,7 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - No mocking — pure function with timestamp inputs
     - _Requirements: 6.2_
 
-  - [ ] 11.3 Write tests for AI response parsing (`backend/tests/ai/parsers_test.ts`)
+  - [~] 11.3 Write tests for AI response parsing (`backend/tests/ai/parsers_test.ts`)
     - Test valid ScanResponse JSON → parsed correctly
     - Test valid ReviewResponse JSON → parsed correctly
     - Test malformed JSON → structured error (not crash)
@@ -310,7 +310,7 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - No mocking — tests the parser functions directly with crafted JSON strings
     - _Requirements: 5.2, 6.6_
 
-  - [ ] 11.4 Write tests for scan and review routes (`backend/tests/routes/ai_routes_test.ts`)
+  - [~] 11.4 Write tests for scan and review routes (`backend/tests/routes/ai_routes_test.ts`)
     - **Mock only the Anthropic SDK client** (the only thing we can't run locally)
     - Test scan route: valid image → mock Claude returns valid ScanResponse → route returns 200 with parsed data
     - Test scan route: invalid image type → 422 before Claude is called
@@ -325,13 +325,13 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - _Requirements: 5.1–5.9, 6.1–6.12_
 
 - [ ] 12. Backend data export and hypotheses retrieval
-  - [ ] 12.1 Implement hypotheses GET route
+  - [~] 12.1 Implement hypotheses GET route
     - _Requirements: 9.1, 9.2_
 
-  - [ ] 12.2 Implement data export route (JSON + CSV)
+  - [~] 12.2 Implement data export route (JSON + CSV)
     - _Requirements: 10.1, 10.2, 10.3, 10.4, 10.5_
 
-  - [ ] 12.3 Write tests for export and hypotheses routes (`backend/tests/routes/export_test.ts`)
+  - [~] 12.3 Write tests for export and hypotheses routes (`backend/tests/routes/export_test.ts`)
     - Test JSON export with data in all tables → correct structure with all records
     - Test JSON export with empty tables → empty arrays
     - Test CSV export → valid files with correct headers and data rows
@@ -342,7 +342,7 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - All tests use real local SQLite with seeded data — no mocking
     - _Requirements: 10.1–10.5, 9.1, 9.2_
 
-- [ ] 13. Checkpoint — Backend complete
+- [~] 13. Checkpoint — Backend complete
   - All backend tests pass against local SQLite
   - All routes functional
   - Ask user if questions arise
@@ -352,22 +352,22 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
 ### Phase 3 — Integration
 
 - [ ] 14. Wire frontend to real backend
-  - [ ] 14.1 Switch API client from mocks to real backend
+  - [~] 14.1 Switch API client from mocks to real backend
     - Set `VITE_USE_MOCKS=false`, configure `VITE_API_BASE_URL`
     - Verify all pages work against real local backend
     - _Requirements: 11.4_
 
-  - [ ] 14.2 Wire backend router to all route handlers
+  - [~] 14.2 Wire backend router to all route handlers
     - Update `backend/main.ts` to dispatch to all routes with CORS + error handling
     - _Requirements: 12.3, 12.6_
 
-  - [ ] 14.3 End-to-end verification
+  - [~] 14.3 End-to-end verification
     - Verify navigation flow: bottom nav → form → submit → dashboard (≤3 taps)
     - Verify loading/error states with real network latency
     - Verify AI scan and review flows end-to-end (manual)
     - _Requirements: 11.1, 11.2, 11.3, 11.4, 11.5, 13.1, 13.2_
 
-- [ ] 15. Final checkpoint — All working
+- [~] 15. Final checkpoint — All working
   - Full app functional end-to-end against local SQLite
   - All tests pass
   - Ready for cloud deployment (swap `DATABASE_MODE=turso` + set Turso env vars)

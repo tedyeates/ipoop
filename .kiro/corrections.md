@@ -12,3 +12,5 @@
 - ❌ `@libsql/client` on Windows needs `--allow-ffi` for native SQLite bindings → ✅ Add `--allow-ffi` to all deno run/test commands that use the DB client
 
 - ❌ `applySchema` in migrate.ts filtered statements with `!s.startsWith("--")` after splitting on `;` — this dropped the first CREATE TABLE because the chunk started with SQL comments → ✅ Strip comment lines before splitting on semicolons
+
+- ❌ `deno.json` compilerOptions `"lib": ["deno.ns", "deno.unstable"]` missing web globals (Request, Response, URL, Headers, console) → ✅ Add `"dom"` to lib array: `["deno.ns", "deno.unstable", "dom"]`
