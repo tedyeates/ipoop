@@ -1,7 +1,7 @@
 # Tech Stack Gotchas
 
 ## Package Manager
-- **pnpm only** — no npm or yarn. `pnpm-lock.yaml` is canonical.
+- **pnpm only** — no npm/yarn. `pnpm-lock.yaml` canonical.
 
 ## Commands
 
@@ -18,7 +18,7 @@ deno lint
 deno fmt
 ```
 
-## Environment Variables
+## Env Vars
 
 ### Backend (Deno Deploy)
 - `ANTHROPIC_API_KEY`
@@ -30,5 +30,5 @@ deno fmt
 - `VITE_API_BASE_URL`
 
 ## Conventions
-- ULIDs for all primary keys
-- ISO8601 for all datetime fields
+- ULIDs for all PKs
+- ISO8601 for all datetimes

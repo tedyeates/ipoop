@@ -280,8 +280,8 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - These are pure functions with no external dependencies
     - _Requirements: 6.2, 6.3, 6.7, 6.8, 6.9_
 
-- [ ] 11. Backend tests — AI layer
-  - [~] 11.1 Write tests for confidence scoring (`backend/tests/ai/confidence_test.ts`)
+- [x] 11. Backend tests — AI layer
+  - [x] 11.1 Write tests for confidence scoring (`backend/tests/ai/confidence_test.ts`)
     - Test label assignment for scores at each boundary (0.00, 0.39, 0.40, 0.64, 0.65, 0.84, 0.85, 0.95)
     - Test data sufficiency caps (<7 days → max Low, <14 days → max Moderate)
     - Test supporting events cap (<3 events → max 0.50)
@@ -290,7 +290,7 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - No mocking — these are pure functions
     - _Requirements: 6.3, 6.7, 6.8, 6.9_
 
-  - [~] 11.2 Write tests for transit window correlation (`backend/tests/ai/correlation_test.ts`)
+  - [x] 11.2 Write tests for transit window correlation (`backend/tests/ai/correlation_test.ts`)
     - Test symptom within 6–24hr window after meal → correlated
     - Test symptom before 6hr → not correlated
     - Test symptom after 24hr → not correlated
@@ -300,7 +300,7 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - No mocking — pure function with timestamp inputs
     - _Requirements: 6.2_
 
-  - [~] 11.3 Write tests for AI response parsing (`backend/tests/ai/parsers_test.ts`)
+  - [x] 11.3 Write tests for AI response parsing (`backend/tests/ai/parsers_test.ts`)
     - Test valid ScanResponse JSON → parsed correctly
     - Test valid ReviewResponse JSON → parsed correctly
     - Test malformed JSON → structured error (not crash)
@@ -310,7 +310,7 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - No mocking — tests the parser functions directly with crafted JSON strings
     - _Requirements: 5.2, 6.6_
 
-  - [~] 11.4 Write tests for scan and review routes (`backend/tests/routes/ai_routes_test.ts`)
+  - [x] 11.4 Write tests for scan and review routes (`backend/tests/routes/ai_routes_test.ts`)
     - **Mock only the Anthropic SDK client** (the only thing we can't run locally)
     - Test scan route: valid image → mock Claude returns valid ScanResponse → route returns 200 with parsed data
     - Test scan route: invalid image type → 422 before Claude is called
@@ -324,14 +324,14 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - Uses real local SQLite for DB operations, mocks only the Claude API call
     - _Requirements: 5.1–5.9, 6.1–6.12_
 
-- [ ] 12. Backend data export and hypotheses retrieval
-  - [~] 12.1 Implement hypotheses GET route
+- [x] 12. Backend data export and hypotheses retrieval
+  - [x] 12.1 Implement hypotheses GET route
     - _Requirements: 9.1, 9.2_
 
-  - [~] 12.2 Implement data export route (JSON + CSV)
+  - [x] 12.2 Implement data export route (JSON + CSV)
     - _Requirements: 10.1, 10.2, 10.3, 10.4, 10.5_
 
-  - [~] 12.3 Write tests for export and hypotheses routes (`backend/tests/routes/export_test.ts`)
+  - [x] 12.3 Write tests for export and hypotheses routes (`backend/tests/routes/export_test.ts`)
     - Test JSON export with data in all tables → correct structure with all records
     - Test JSON export with empty tables → empty arrays
     - Test CSV export → valid files with correct headers and data rows
@@ -342,7 +342,7 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
     - All tests use real local SQLite with seeded data — no mocking
     - _Requirements: 10.1–10.5, 9.1, 9.2_
 
-- [~] 13. Checkpoint — Backend complete
+- [ ] 13. Checkpoint — Backend complete
   - All backend tests pass against local SQLite
   - All routes functional
   - Ask user if questions arise
@@ -352,22 +352,22 @@ Build a personal, mobile-first IBS trigger tracking web app with a React SPA fro
 ### Phase 3 — Integration
 
 - [ ] 14. Wire frontend to real backend
-  - [~] 14.1 Switch API client from mocks to real backend
+  - [ ] 14.1 Switch API client from mocks to real backend
     - Set `VITE_USE_MOCKS=false`, configure `VITE_API_BASE_URL`
     - Verify all pages work against real local backend
     - _Requirements: 11.4_
 
-  - [~] 14.2 Wire backend router to all route handlers
+  - [ ] 14.2 Wire backend router to all route handlers
     - Update `backend/main.ts` to dispatch to all routes with CORS + error handling
     - _Requirements: 12.3, 12.6_
 
-  - [~] 14.3 End-to-end verification
+  - [ ] 14.3 End-to-end verification
     - Verify navigation flow: bottom nav → form → submit → dashboard (≤3 taps)
     - Verify loading/error states with real network latency
     - Verify AI scan and review flows end-to-end (manual)
     - _Requirements: 11.1, 11.2, 11.3, 11.4, 11.5, 13.1, 13.2_
 
-- [~] 15. Final checkpoint — All working
+- [ ] 15. Final checkpoint — All working
   - Full app functional end-to-end against local SQLite
   - All tests pass
   - Ready for cloud deployment (swap `DATABASE_MODE=turso` + set Turso env vars)

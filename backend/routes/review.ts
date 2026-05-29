@@ -239,7 +239,7 @@ RESPOND WITH ONLY valid JSON in this exact format (no markdown, no explanation o
 
 // ─── Response Parsing ────────────────────────────────────────────────────────
 
-function parseReviewResponse(text: string): { summary: string; hypotheses: Hypothesis[] } {
+export function parseReviewResponse(text: string): { summary: string; hypotheses: Hypothesis[] } {
   // Strip markdown code fences if present
   let cleaned = text.trim();
   if (cleaned.startsWith("```")) {

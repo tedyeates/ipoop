@@ -11,6 +11,8 @@ import { handleContext } from "./routes/context.ts";
 import { handleSymptoms } from "./routes/symptoms.ts";
 import { handleReview } from "./routes/review.ts";
 import { handleScan } from "./routes/scan.ts";
+import { handleHypotheses } from "./routes/hypotheses.ts";
+import { handleExport } from "./routes/export.ts";
 
 /** Route a request to the appropriate handler based on URL path. */
 async function route(req: Request): Promise<Response> {
@@ -51,11 +53,11 @@ async function route(req: Request): Promise<Response> {
   }
 
   if (path === "/api/hypotheses") {
-    return methodNotAllowed("Hypotheses routes not yet implemented");
+    return handleHypotheses(req);
   }
 
   if (path === "/api/export") {
-    return methodNotAllowed("Export routes not yet implemented");
+    return handleExport(req);
   }
 
   if (path === "/api/dashboard") {
